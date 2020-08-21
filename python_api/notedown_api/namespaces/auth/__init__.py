@@ -1,0 +1,1 @@
+from notedown_api.namespaces.auth.auth_views import auth_namespace

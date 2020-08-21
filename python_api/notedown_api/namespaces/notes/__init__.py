@@ -1,0 +1,1 @@
+from notedown_api.namespaces.notes.notes_views import notes_namespace
