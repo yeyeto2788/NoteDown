@@ -1,14 +1,14 @@
-from datetime import datetime
+import logging
 
-from flask import make_response, jsonify
+from flask import make_response, jsonify, request
 from flask_restx import Namespace, Resource, fields
 
-from notedown_api.db_models import NoteModel
-from notedown_api.extensions import db
+from notedown_api.namespaces.notes.notes_controller import NotesController
 from notedown_api.parsers import notes_parser
 from notedown_api.utils import token_required
 
 notes_namespace = Namespace('notes', description='Notes related operations')
+logger = logging.getLogger()
 
 note_schema = notes_namespace.model(
     'note_schema',
@@ -22,12 +22,12 @@ note_schema = notes_namespace.model(
 
 
 @notes_namespace.route("/<id>")
+@notes_namespace.doc(security={"apiKey": "X-API-KEY"})
 class Notes(Resource):
 
     @notes_namespace.marshal_with(note_schema)
     @notes_namespace.expect(notes_parser)
-    @notes_namespace.doc(security="apiKey")
-    # @token_required
+    @token_required
     def post(self, id):
         """Edit a given note.
 
@@ -38,18 +38,20 @@ class Notes(Resource):
             NoteModel modified.
         """
         args = notes_parser.parse_args()
-        note = db.session.query(NoteModel).filter_by(id=id).first()
+        token = request.headers['X-API-KEY']
+        controller = NotesController()
+        user_email = controller.get_email_from_token(token)
+        note = controller.edit_user_note(email=user_email, note_id=id,
+                                         note_text=args.text)
 
         if note is not None:
-            note.text = args.text
-            note.date_edited = datetime.utcnow()
-            db.session.add(note)
-            db.session.commit()
             return note
         else:
-            return make_response(jsonify(message="That note does not exists"), 400)
+            return make_response(jsonify(message="That note does not exists"),
+                                 400)
 
     @notes_namespace.marshal_with(note_schema)
+    @token_required
     def get(self, id):
         """Get an specific note.
 
@@ -59,10 +61,14 @@ class Notes(Resource):
         Returns:
             NoteModel retrieved.
         """
-        note = db.session.query(NoteModel).filter_by(id=id).first()
+        token = request.headers['X-API-KEY']
+        controller = NotesController()
+        user_email = controller.get_email_from_token(token)
+        note = controller.get_user_note(email=user_email, note_id=id)
         return note
 
     @notes_namespace.marshal_with(note_schema)
+    @token_required
     def delete(self, id):
         """Delete a given note.
 
@@ -72,27 +78,34 @@ class Notes(Resource):
         Returns:
             NoteModel deleted.
         """
-        note = db.session.query(NoteModel).filter_by(id=id).first()
-        db.session.delete(note)
-        db.session.commit()
+        token = request.headers['X-API-KEY']
+        controller = NotesController()
+        user_email = controller.get_email_from_token(token)
+        note = controller.delete_user_note(email=user_email, note_id=id)
         return note
 
 
 @notes_namespace.route("/")
+@notes_namespace.doc(security={"apiKey": "X-API-KEY"})
 class Notes(Resource):
 
     @notes_namespace.marshal_list_with(note_schema)
+    @token_required
     def get(self) -> list:
         """Get all notes.
 
         Returns:
             List with all notes on the database.
         """
-        notes = db.session.query(NoteModel).all()
+        token = request.headers['X-API-KEY']
+        controller = NotesController()
+        user_email = controller.get_email_from_token(token)
+        notes = controller.get_user_notes(email=user_email)
         return notes
 
     @notes_namespace.marshal_with(note_schema)
     @notes_namespace.expect(notes_parser)
+    @token_required
     def post(self):
         """Add a note to the database.
 
@@ -100,12 +113,8 @@ class Notes(Resource):
             NoteModel added to the database.
         """
         args = notes_parser.parse_args()
-        text = args.text
-        note = NoteModel(
-            text=text,
-            date_created=datetime.utcnow(),
-            date_edited=datetime.utcnow()
-        )
-        db.session.add(note)
-        db.session.commit()
+        token = request.headers['X-API-KEY']
+        controller = NotesController()
+        user_email = controller.get_email_from_token(token)
+        note = controller.add_user_note(email=user_email, note_text=args.text)
         return note

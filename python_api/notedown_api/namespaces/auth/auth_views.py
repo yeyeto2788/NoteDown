@@ -1,12 +1,8 @@
-from datetime import datetime
-
-from flask import jsonify, request
+from flask import jsonify, request, make_response
 from flask_restx import Namespace, Resource, fields
 
-from notedown_api.db_models import UserModel
-from notedown_api.extensions import db
+from notedown_api.namespaces.auth.auth_controller import AuthController
 from notedown_api.parsers import register_parser
-from notedown_api.utils import create_token
 
 auth_namespace = Namespace('auth', description='Auth related operations')
 
@@ -24,6 +20,7 @@ class Login(Resource):
 
     @auth_namespace.response(200, "Success")
     @auth_namespace.response(404, "Not found error")
+    @auth_namespace.doc(security='basicAuth')
     def post(self):
         """Login a given user.
 
@@ -32,18 +29,17 @@ class Login(Resource):
         """
         auth = request.authorization
         token = None
+        status_code = 401
+        controller = AuthController()
 
         if auth and auth.username:
-            user = db.session.query(UserModel)\
-                .filter_by(email=auth.username)\
-                .first()
-            if user is not None and user.check_password(auth.password):
-                token = create_token(user.email)
-                user.last_login = datetime.utcnow()
-                db.session.add(user)
-                db.session.commit()
+            user = controller.get_user(auth.username)
 
-        return jsonify(token=token)
+            if user is not None and user.check_password(auth.password):
+                token = controller.login_user(user)
+                status_code = 200
+
+        return make_response(jsonify(token=token), status_code)
 
 
 @auth_namespace.route("/register")
@@ -58,12 +54,6 @@ class RegisterUser(Resource):
 
         """
         args = register_parser.parse_args()
-
-        user = UserModel(
-            email=args.email,
-            last_login=datetime.utcnow()
-        )
-        user.set_password(args.password)
-        db.session.add(user)
-        db.session.commit()
+        controller = AuthController()
+        user = controller.add_user(email=args.email, password=args.password)
         return user
