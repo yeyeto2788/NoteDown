@@ -1,4 +1,4 @@
-"""User database model."""
+"""Database models declaration."""
 from datetime import datetime
 
 from flask_login import UserMixin
@@ -33,8 +33,13 @@ class UserModel(UserMixin, db.Model):
         primary_key=True,
         autoincrement=True,
     )
+    username = db.Column(
+        db.String(),
+        unique=True,
+        nullable=False
+    )
     email = db.Column(
-        db.String(40),
+        db.String(),
         unique=True,
         nullable=False
     )
@@ -50,11 +55,11 @@ class UserModel(UserMixin, db.Model):
         unique=False,
         nullable=True
     )
-
     notes = db.relationship(
         'NoteModel',
         secondary=notes,
-        lazy='subquery',
+        lazy='dynamic',
+        cascade="all,delete",
         backref=db.backref('UserModel', lazy=True)
     )
 
@@ -74,8 +79,13 @@ class UserModel(UserMixin, db.Model):
         """
         return check_password_hash(self.password, password)
 
-    def __repr__(self) -> str:
-        return f'<{self.__class__} {self.username}>'
+    def __repr__(self) -> dict:
+        representation = {
+            self.__class__: {
+                self.email: self.username
+            }
+        }
+        return representation
 
 
 class NoteModel(db.Model):
@@ -98,5 +108,10 @@ class NoteModel(db.Model):
         super().__init__(*args, **kwargs)
         self.date_created = datetime.utcnow()
 
-    def __repr__(self) -> str:
-        return f'<{self.__class__} {self.id}>'
+    def __repr__(self) -> dict:
+        representation = {
+            self.__class__: {
+                self.id: self.text
+            }
+        }
+        return representation
