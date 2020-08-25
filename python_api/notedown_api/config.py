@@ -5,6 +5,7 @@ import os
 DEBUG = True
 CSRF_ENABLED = True
 SECRET_KEY = os.urandom(16)
+TOKEN_SECRET = os.getenv("TOKEN_SECRET", "noteDown_Not_so_secret_key")
 
 APP_ROOT_DIR = os.path.dirname(os.path.abspath(__name__))
 
@@ -18,5 +19,8 @@ authorizations = {
         "type": "apiKey",
         "in": "header",
         "name": "X-API-KEY"
+    },
+    "basicAuth": {
+        "type": "basic",
     }
 }
