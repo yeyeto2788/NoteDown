@@ -46,10 +46,10 @@ logging_configuration = {
         },
         'file': {
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': './finforc.log',
+            'filename': './notedown_api.log',
             'formatter': 'default',
             'maxBytes': 1024,
-            'backupCount': 3
+            'backupCount': 5
         }
     },
     'root': {
