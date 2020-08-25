@@ -1,27 +1,59 @@
 import React from "react";
-import { Button, Nav, Navbar, Form, FormControl } from "react-bootstrap";
+import { NavDropdown, Navbar, Form, FormControl, Nav, InputGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import Cookies from "js-cookie";
+
+import { useApplicationValue } from "../AppStateProvider";
+import { reducerActions } from "../AppReducer";
 
 const HeaderComponent = (props) => {
+  const [{ currentUser }, dispatchAction] = useApplicationValue();
+
+  const handleLogout = () => {
+    Cookies.remove("noteDownUser");
+    Cookies.remove("noteDownUserToken");
+    dispatchAction({
+      type: reducerActions.tokenChange,
+      item: null,
+    });
+    dispatchAction({
+      type: reducerActions.userChange,
+      item: null,
+    });
+  };
+
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar className="align-self-center" bg="primary" variant="dark" fixed="top">
       <Navbar.Brand href="#home">NoteDown</Navbar.Brand>
       <Nav className="mr-auto">
         {/* <Nav.Link href="#link1">link1</Nav.Link>
         <Nav.Link href="#link2">link2</Nav.Link> */}
       </Nav>
-      <Form inline>
-        <FormControl
-          id="searchBox"
-          type="text"
-          placeholder={props.placeholder}
-          className="mr-sm-2"
-          onChange={props.OnSearchChange}
-          onSubmit={props.onSubmit}
-        />
-        <Button variant="outline-light" onClick={props.onSearch}>
-          Search
-        </Button>
+      <Form>
+        <InputGroup className="mt-3">
+          <FormControl
+            id="searchBox"
+            placeholder="Search on notes"
+            type="text"
+            onChange={props.OnSearchChange}
+          ></FormControl>
+          <InputGroup.Append>
+            <InputGroup.Text>
+              <FontAwesomeIcon icon={faSearch} onClick={props.onSearch} />
+            </InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
       </Form>
+      <Nav className="mr-auto">
+        <NavDropdown title={currentUser} id="basic-nav-dropdown">
+          <NavDropdown.Item href="#" onClick={handleLogout}>
+            Logout
+          </NavDropdown.Item>
+          <NavDropdown.Item href="#">Action 1</NavDropdown.Item>
+          <NavDropdown.Item href="#">Action 2</NavDropdown.Item>
+        </NavDropdown>
+      </Nav>
     </Navbar>
   );
 };

@@ -9,7 +9,7 @@ import NoteComponent from "./NoteComponent";
 import { getNoteByID } from "../utils";
 
 const NoteList = (props) => {
-  const [{ notes, currentNote, showAddButton }, dispatchAction] = useApplicationValue();
+  const [{ notes, currentNote, showAddButton, userToken }, dispatchAction] = useApplicationValue();
 
   const handleEditNote = (noteId) => {
     const note = getNoteByID(notes, noteId);
@@ -38,7 +38,7 @@ const NoteList = (props) => {
   const handleDeleteNote = (noteId) => {
     const url = `http://localhost:8080/api/v1/notes/${noteId}`;
     axios
-      .delete(url)
+      .delete(url, { headers: { "X-API-KEY": userToken } })
       .then((response) => {
         console.log(response);
       })
@@ -83,6 +83,8 @@ const NoteList = (props) => {
             <NoteComponent
               key={note.id}
               text={note.text}
+              date_created={note.date_created}
+              date_edited={note.date_edited}
               onDeleteNote={() => {
                 handleDeleteNote(note.id);
               }}
@@ -100,7 +102,7 @@ const NoteList = (props) => {
   useEffect(() => {
     const url = "http://localhost:8080/api/v1/notes/";
     axios
-      .get(url)
+      .get(url, { headers: { "X-API-KEY": userToken } })
       .then((response) => {
         console.log(response);
         dispatchAction({

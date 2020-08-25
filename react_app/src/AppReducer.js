@@ -4,6 +4,8 @@ export const initialState = {
   currentNoteText: null,
   editorInUse: false,
   showAddButton: true,
+  currentUser: null,
+  userToken: null,
 };
 
 export const reducerActions = {
@@ -15,6 +17,8 @@ export const reducerActions = {
   currentNoteText: "CURRENT_NOTE_TEXT",
   editorInUse: "EDITOR_IN_USE",
   showAddButton: "SHOW_ADD_BUTTON",
+  userChange: "USER_CHANGE",
+  tokenChange: "TOKEN_CHANGE",
 };
 
 export default function reducer(state, action) {
@@ -41,6 +45,12 @@ export default function reducer(state, action) {
 
     case reducerActions.showAddButton:
       return { ...state, showAddButton: action.item };
+
+    case reducerActions.userChange:
+      return { ...state, currentUser: action.item };
+
+    case reducerActions.tokenChange:
+      return { ...state, userToken: action.item };
 
     default:
       return state;

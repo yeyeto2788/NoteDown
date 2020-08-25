@@ -26,15 +26,17 @@ python run.py
 ## TODO
 
 - **API**
-  - Require tokens on all endpoints except for the login and the register ones.
+  - ~~Require tokens on all endpoints except for the login and the register ones~~.
+  - ~~Move logic into controllers separate.~~
+  - Add logout endpoint.
   - Create a token blacklist.
-  - Move logic into controllers separate.
   - Create test for the logic on the controllers and/or `utils` module.
   - Adopt PostgreSQL as the main database and maybe have SQLite as backup?
 - **FE**
-  - Create the login component.
-  - Use token for request.
-  - Authenticate users.
+  - ~~Create the login component.~~
+  - ~~Use token for request.~~
+  - ~~Authenticate users.~~
+  - Add logout call to the API.
   - Better refresh on NoteList component.
     - Add note.
     - Edit note.

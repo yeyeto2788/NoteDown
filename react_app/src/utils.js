@@ -27,3 +27,8 @@ export function findOnNotes(notes, text) {
 
   return noteFound;
 }
+
+export function formatDate(date) {
+  const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+  return new Date(date).toLocaleDateString("en-US", options);
+}

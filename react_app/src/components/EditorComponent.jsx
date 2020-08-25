@@ -10,7 +10,7 @@ import { useApplicationValue } from "../AppStateProvider";
 import { reducerActions } from "../AppReducer";
 
 const EditorComponent = (props) => {
-  const [{ currentNote, currentNoteText }, dispatchAction] = useApplicationValue();
+  const [{ currentNote, currentNoteText, userToken }, dispatchAction] = useApplicationValue();
 
   const mdEditor = React.useRef(null);
   const [localNoteText, setNoteText] = useState(currentNoteText ? currentNoteText : "");
@@ -32,6 +32,7 @@ const EditorComponent = (props) => {
           params: {
             text: noteText,
           },
+          headers: { "X-API-KEY": userToken },
         })
         .then((response) => {
           note = response.data;
@@ -70,8 +71,9 @@ const EditorComponent = (props) => {
   };
 
   const handleEditorChange = ({ html, text }) => {
-    const newValue = text.replace(/\d/g, "");
-    setNoteText(newValue);
+    // Below: how we would normally read it
+    // const newValue = text.replace(/\d/g, "");
+    setNoteText(text);
   };
 
   return (
@@ -80,7 +82,7 @@ const EditorComponent = (props) => {
         ref={mdEditor}
         value={localNoteText}
         style={{
-          height: "500px",
+          height: "550px",
         }}
         onChange={handleEditorChange}
         renderHTML={(text) => <ReactMarkdown source={text} />}
