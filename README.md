@@ -11,7 +11,8 @@
 ## Table of Contents
 
 - [Requirements](#requirements)
-- [Installation](#installation)
+- [Local Installation](#local-installation)
+- [Docker Installation](#docker-installation)
 - [Features](#features)
 - [Contributing](#contributing)
 - [Team](#team)
@@ -31,9 +32,9 @@
 
 ---
 
-<!-- Installation -->
+<!-- Local Installation -->
 
-## Installation
+## Local installation
 
 ### Clone :dancers:
 
@@ -62,6 +63,25 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
   cd ..
   cd ./python_api
   python run.py
+  ```
+
+---
+
+## Docker installation
+
+- Build the image
+  ```shell
+  docker build --tag notedown-image .
+  ```
+- Run the container
+
+  ```shell
+  docker run -p 8080:8080 -d --name notedown-app notedown-image
+  ```
+
+- Inspect the container
+  ```shell
+  docker exec -it notedown-app /bin/bash
   ```
 
 ---
@@ -110,17 +130,18 @@ Reach out to me at one of the following places!
 - **FE**
   - ~~Create the login component.~~ :heavy_check_mark:
   - ~~Use token for request.~~ :heavy_check_mark:
-  - ~~Authenticate users.~~ :heavy_check_mark:
+  - Login/Register screen.
+  - Authenticate users.
   - Add logout call to the API.
   - Better refresh on NoteList component.
     - Add note.
     - Edit note.
   - Create tests for the components.
-  - Add logo on the page.
+  - Add logo/icon on the page.
   - Generate a common error page component that could be reusable for any error that might occur while using the application.
   - Print option for the note.
 - **Deployment**
-  - Finalize `Dockerfile` or move it to `docker-compose.yml`.
+  - ~~Finalize `Dockerfile`~~ :heavy_check_mark: or move it to `docker-compose.yml`.
   - Create some tools that might help on deployment and CI/CD pipelines.
 - **General**
   - ~~Generate simple logo for the application.~~ :heavy_check_mark:
