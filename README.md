@@ -72,7 +72,7 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 
 - Markdown syntax for the notes. :bookmark_tabs:
 - JWT for authentication :lock:
-- Feature3
+- Print your notes. :printer: (Not yet implemented :worried:)
 
 ---
 
@@ -80,7 +80,7 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 
 ## FAQ :raising_hand_woman::raising_hand_man:
 
-No frequently asked question :neutral_face:
+No frequently asked question yet. :neutral_face:
 
 ---
 
@@ -92,7 +92,7 @@ Reach out to me at one of the following places!
 
 - Website at [juanbiondi.com](https://www.juanbiondi.com) (Work In Progess)
 - Create an [issue](https://github.com/yeyeto2788/NoteDown/issues/new/choose) on this repository. :pirate_flag:
-- Send an [Email](mailto:jebp.freelance@gmail.com) :email:
+- Send me an [email](mailto:jebp.freelance@gmail.com) :email:
 
 ---
 
