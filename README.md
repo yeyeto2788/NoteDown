@@ -2,9 +2,13 @@
 
 <img src="./documentation/notedown_logo.svg" height="180"><qoute>Markdown :bookmark_tabs: note taking app using React.js and Python.<qoute>
 
+<!-- Project images -->
+
 ---
 
-## Table of Contents (Optional)
+<!-- Table of content -->
+
+## Table of Contents
 
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -18,12 +22,16 @@
 
 ---
 
+<!-- Requirements -->
+
 ## Requirements
 
 - Node.js >= 11.9.0
 - Python >= 3.7
 
 ---
+
+<!-- Installation -->
 
 ## Installation
 
@@ -33,14 +41,14 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 
 ### Setup :toolbox:
 
-- Install Python requirements.
+- Install Python requirements. :computer:
 
   ```shell
   cd ./NoteDown/python_api
   pip install -r requirements
   ```
 
-- Install Nodejs requirements
+- Install Nodejs requirements :electron:
 
   ```shell
   cd ../react_app
@@ -49,7 +57,7 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
   npm run postbuild
   ```
 
-- Serve the application using python
+- Serve the application using python :snake:
   ```shell
   cd ..
   cd ./python_api
@@ -58,13 +66,17 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 
 ---
 
-## Features
+<!-- Features -->
 
-- Feature1
-- Feature2
+## Features :sparkles:
+
+- Markdown syntax for the notes. :bookmark_tabs:
+- JWT for authentication :lock:
 - Feature3
 
 ---
+
+<!-- Frequently asked questions -->
 
 ## FAQ :raising_hand_woman::raising_hand_man:
 
@@ -72,14 +84,19 @@ No frequently asked question :neutral_face:
 
 ---
 
+<!-- Support -->
+
 ## Support :mechanic:
 
 Reach out to me at one of the following places!
 
-- Website at [juanbiondi.com](https://www.juanbiondi.com) (WIP)
-- Create an [issue](https://github.com/yeyeto2788/NoteDown/issues/new/choose) on this repository.
+- Website at [juanbiondi.com](https://www.juanbiondi.com) (Work In Progess)
+- Create an [issue](https://github.com/yeyeto2788/NoteDown/issues/new/choose) on this repository. :pirate_flag:
+- Send an [Email](mailto:jebp.freelance@gmail.com) :email:
 
 ---
+
+<!-- Things to do -->
 
 ## ToDo list
 
@@ -106,10 +123,14 @@ Reach out to me at one of the following places!
   - Finalize `Dockerfile` or move it to `docker-compose.yml`.
   - Create some tools that might help on deployment and CI/CD pipelines.
 - **General**
-  - Generate simple logo for the application.
+  - ~~Generate simple logo for the application.~~ :heavy_check_mark:
   - Gather some screenshots.
-  - Improve this `README`.
+  - ~~Improve this `README`.~~ :heavy_check_mark:
+
+---
+
+<!-- License -->
 
 ## License
 
-See `LICENSE` for more information.
+See [**`LICENSE`**](./LICENSE) for more information.
