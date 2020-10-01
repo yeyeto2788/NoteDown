@@ -15,7 +15,6 @@
 - [Docker Installation](#docker-installation)
 - [Features](#features)
 - [Contributing](#contributing)
-- [Team](#team)
 - [FAQ](#faq)
 - [Support](#support)
 - [To Do List](#todo-list)
@@ -90,6 +89,14 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
   docker exec -it notedown-app /bin/bash
   ```
 
+## docker-compose installation
+
+- Execute this one and only command.
+
+```shell
+docker-compose up --force-recreate --build
+```
+
 ---
 
 <!-- Features -->
@@ -153,6 +160,20 @@ Reach out to me at one of the following places!
   - ~~Generate simple logo for the application.~~ :heavy_check_mark:
   - Gather some screenshots.
   - ~~Improve this `README`.~~ :heavy_check_mark:
+
+---
+
+<!-- Contributing -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/super_awesome_feature`)
+3. Commit your Changes (`git commit -m 'Add some awesome feature'`)
+4. Push to the Branch (`git push origin feature/super_awesome_feature`)
+5. Open a Pull Request
 
 ---
 
