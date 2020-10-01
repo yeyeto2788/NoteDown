@@ -141,7 +141,7 @@ Reach out to me at one of the following places!
   - Generate a common error page component that could be reusable for any error that might occur while using the application.
   - Print option for the note.
 - **Deployment**
-  - ~~Finalize `Dockerfile`~~ :heavy_check_mark: or move it to `docker-compose.yml`.
+  - ~~Finalize `Dockerfile`~~ :heavy_check_mark: and/or move it to `docker-compose.yml` so every component can be deployed separately (DB, FE, BE).
   - Create some tools that might help on deployment and CI/CD pipelines.
 - **General**
   - ~~Generate simple logo for the application.~~ :heavy_check_mark:
