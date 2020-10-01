@@ -69,17 +69,23 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 
 ## Docker installation
 
-- Build the image
-  ```shell
-  docker build --tag notedown-image .
-  ```
-- Run the container
+- Build the images :cd:
 
   ```shell
-  docker run -p 8080:8080 -d --name notedown-app notedown-image
+  docker build --tag notedown_app_image -f notedown_app.dockerfile --build-args REACT_APP_NOTEDOWN_API_URL=http://127.0.0.1:5000.
+  docker build --tag notedown_api_image -f notedown_api.dockerfile --build-args NOTEDOWN_DB_URL=<url_of_your_db> .
   ```
 
-- Inspect the container
+  For database URL on the API you need to follow the syntax described [here](https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls).
+
+- Run the container :package:
+
+  ```shell
+  docker run -p 80:80 -d --name notedown-app notedown_app_image
+  docker run -p 5000:8080 -d --name notedown-api notedown_api_image
+  ```
+
+- Inspect the container :mag:
   ```shell
   docker exec -it notedown-app /bin/bash
   ```
@@ -141,7 +147,7 @@ Reach out to me at one of the following places!
   - Generate a common error page component that could be reusable for any error that might occur while using the application.
   - Print option for the note.
 - **Deployment**
-  - ~~Finalize `Dockerfile`~~ :heavy_check_mark: and/or move it to `docker-compose.yml` so every component can be deployed separately (DB, FE, BE).
+  - ~~Finalize `Dockerfile`~~ :heavy_check_mark: and/or ~~move it to `docker-compose.yml` so every component can be deployed separately (DB, FE, BE)~~ :heavy_check_mark:.
   - Create some tools that might help on deployment and CI/CD pipelines.
 - **General**
   - ~~Generate simple logo for the application.~~ :heavy_check_mark:
