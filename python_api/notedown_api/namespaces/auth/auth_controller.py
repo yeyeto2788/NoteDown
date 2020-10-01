@@ -18,7 +18,9 @@ class AuthController:
         Returns:
             UserModel created.
         """
-        user = UserModel(email=email, last_login=datetime.utcnow())
+        last_login = datetime.utcnow()
+        username = hash((email, last_login.timestamp()))
+        user = UserModel(email=email, last_login=last_login, username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
