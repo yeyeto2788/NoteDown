@@ -36,7 +36,7 @@ const NoteList = (props) => {
   };
 
   const handleDeleteNote = (noteId) => {
-    const url = `http://localhost:8080/api/v1/notes/${noteId}`;
+    const url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/notes/${noteId}`;
     axios
       .delete(url, { headers: { "X-API-KEY": userToken } })
       .then((response) => {
@@ -100,7 +100,7 @@ const NoteList = (props) => {
   };
 
   useEffect(() => {
-    const url = "http://localhost:8080/api/v1/notes/";
+    const url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/notes/`;
     axios
       .get(url, { headers: { "X-API-KEY": userToken } })
       .then((response) => {

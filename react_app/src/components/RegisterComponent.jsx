@@ -11,7 +11,7 @@ const RegisterComponent = (props) => {
   const [show, setShow] = useState(false);
 
   const handleSubmit = (event) => {
-    const url = "http://localhost:8080/api/v1/auth/register";
+    const url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/auth/register`;
     const form = event.currentTarget;
 
     if (form.checkValidity() === false) {

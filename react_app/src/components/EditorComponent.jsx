@@ -22,9 +22,9 @@ const EditorComponent = (props) => {
       noteText = mdEditor.current.getMdValue();
 
       if (currentNote !== null) {
-        url = `http://localhost:8080/api/v1/notes/${currentNote}`;
+        url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/notes/${currentNote}`;
       } else {
-        url = `http://localhost:8080/api/v1/notes/`;
+        url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/notes/`;
       }
 
       axios
