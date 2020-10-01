@@ -11,7 +11,7 @@ APP_ROOT_DIR = os.path.dirname(os.path.abspath(__name__))
 
 # Database configuration variables.
 # SQLALCHEMY_DATABASE_URI = f"postgres://{__credentials}@{__url}"
-SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(APP_ROOT_DIR, 'test.db')}"
+SQLALCHEMY_DATABASE_URI = os.getenv("NOTEDOWN_DB_URL", f"sqlite:///{os.path.join(APP_ROOT_DIR, 'test.db')}")
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 authorizations = {
