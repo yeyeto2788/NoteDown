@@ -143,7 +143,7 @@ Reach out to me at one of the following places!
     - Add note.
     - Edit note.
   - Create tests for the components.
-  - Add logo/icon on the page.
+  - Add logo and ~~icon on the page~~.:heavy_check_mark:
   - Generate a common error page component that could be reusable for any error that might occur while using the application.
   - Print option for the note.
 - **Deployment**
