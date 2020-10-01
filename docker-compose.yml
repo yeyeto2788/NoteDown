@@ -1,12 +1,30 @@
 version: "3.8"
 services:
+  # Frontend Application.
   notedown_app:
     build:
       context: .
-      dockerfile: Dockerfile
-      labels:
-        - "name:notedown_image"
+      dockerfile: notedown_app.dockerfile
+      args:
+        NOTEDOWN_API_URL: http://127.0.0.1:5000
     container_name: notedown_app
+    depends_on:
+      - notedown_db
+      - notedown_api
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    ports:
+      - 80:80
+      - 443:443
+  # Backend API
+  notedown_api:
+    build:
+      context: .
+      dockerfile: notedown_api.dockerfile
+    container_name: notedown_api
     environment:
       NOTEDOWN_DB_URL: "postgresql://notedown_db_user:${NOTEDOWN_DB_PASSWORD-notedown}@notedown_db:5432/notedown_db"
     depends_on:
@@ -16,11 +34,9 @@ services:
         condition: on-failure
         delay: 5s
         max_attempts: 3
-        window: 120s
     ports:
-      - 80:8080
-      - 443:8080
-
+      - 5000:8080
+  # Database
   notedown_db:
     image: postgres
     restart: always
@@ -28,11 +44,11 @@ services:
     environment:
       POSTGRES_PASSWORD: ${NOTEDOWN_DB_PASSWORD-notedown}
       POSTGRES_USER: notedown_db_user
+      POSTGRES_DB: notedown_db
     deploy:
       restart_policy:
         condition: on-failure
         delay: 5s
         max_attempts: 3
-        window: 120s
     expose:
       - 5432
