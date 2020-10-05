@@ -1,6 +1,7 @@
 <!-- PROJECT LOGO -->
 
-<img src="./documentation/notedown_logo.svg" height="180"><qoute>Markdown :bookmark_tabs: note taking app using React.js and Python.<qoute>
+<img src="./documentation/notedown_logo.svg" height="180">
+<qoute>Markdown :bookmark_tabs: note taking app using React.js and Python.<qoute>
 
 <!-- Project images -->
 
@@ -71,8 +72,8 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 - Build the images :cd:
 
   ```shell
-  docker build --tag notedown_app_image -f notedown_app.dockerfile --build-args REACT_APP_NOTEDOWN_API_URL=http://127.0.0.1:5000.
-  docker build --tag notedown_api_image -f notedown_api.dockerfile --build-args NOTEDOWN_DB_URL=<url_of_your_db> .
+  docker build --tag notedown_fe_image -f ./deployment/notedown_fe.dockerfile .
+  docker build --tag notedown_api_image -f ./deployment/notedown_api.dockerfile --build-args NOTEDOWN_DB_URL=<url_of_your_db> .
   ```
 
   For database URL on the API you need to follow the syntax described [here](https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls).
@@ -80,8 +81,8 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 - Run the container :package:
 
   ```shell
-  docker run -p 80:80 -d --name notedown-app notedown_app_image
-  docker run -p 5000:8080 -d --name notedown-api notedown_api_image
+  docker run -p 80:3000 -d --name notedown-fe notedown_app_image
+  docker run -p 8080:8080 -d --name notedown-api notedown_api_image
   ```
 
 - Inspect the container :mag:
@@ -91,10 +92,10 @@ Clone this repo to your local machine using `git clone https://github.com/yeyeto
 
 ## docker-compose installation
 
-- Execute this one and only command.
+- Execute this one and only command from the root directory of this repository.
 
 ```shell
-docker-compose up --force-recreate --build
+docker-compose --file ./deployment/docker-compose.yml up --force-recreate --build
 ```
 
 ---
@@ -151,7 +152,7 @@ Reach out to me at one of the following places!
     - Add note.
     - Edit note.
   - Create tests for the components.
-  - Add logo and ~~icon on the page~~.:heavy_check_mark:
+  - ~~Add logo~~ :heavy_check_mark: and ~~icon on the page~~.:heavy_check_mark:
   - Generate a common error page component that could be reusable for any error that might occur while using the application.
   - Print option for the note.
 - **Deployment**
