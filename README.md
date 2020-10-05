@@ -158,6 +158,7 @@ Reach out to me at one of the following places!
 - **Deployment**
   - ~~Finalize `Dockerfile`~~ :heavy_check_mark: and/or ~~move it to `docker-compose.yml` so every component can be deployed separately (DB, FE, BE)~~ :heavy_check_mark:.
   - Create some tools that might help on deployment and CI/CD pipelines.
+  - Add SSL support.
 - **General**
   - ~~Generate simple logo for the application.~~ :heavy_check_mark:
   - Gather some screenshots.
