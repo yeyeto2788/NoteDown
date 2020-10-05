@@ -11,7 +11,7 @@ const RegisterComponent = (props) => {
   const [show, setShow] = useState(false);
 
   const handleSubmit = (event) => {
-    const url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/auth/register`;
+    const url = `/api/v1/auth/register`;
     const form = event.currentTarget;
 
     if (form.checkValidity() === false) {
@@ -62,7 +62,7 @@ const RegisterComponent = (props) => {
   };
 
   return (
-    <div className="container">
+    <div className="container border-right">
       <Card style={{ width: "40rem" }}>
         <Card.Body>
           <h4 className="card-title text-center mb-4 mt-1">Register on the site</h4>

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 import axios from "axios";
+import logo from "../notedown_logo.svg";
 
 import { useApplicationValue } from "../AppStateProvider";
 import { reducerActions } from "../AppReducer";
@@ -41,8 +42,11 @@ const HeaderComponent = (props) => {
   };
 
   return (
-    <Navbar className="align-self-center" bg="primary" variant="dark" fixed="top">
-      <Navbar.Brand href="#home">NoteDown</Navbar.Brand>
+    <Navbar className="align-self-center" bg="primary" variant="dark" fixed="top" expand="lg">
+      <Navbar.Brand href="#home">
+        <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top" />{" "}
+        NoteDown
+      </Navbar.Brand>
       <Nav className="mr-auto">
         {/* <Nav.Link href="#link1">link1</Nav.Link>
         <Nav.Link href="#link2">link2</Nav.Link> */}
