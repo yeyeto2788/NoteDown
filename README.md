@@ -137,15 +137,15 @@ Reach out to me at one of the following places!
   - ~~Require tokens on all endpoints except for the login and the register ones~~. :heavy_check_mark:
   - ~~Move logic into controllers separate.~~ :heavy_check_mark:
   - Add logout endpoint.
-  - Create a token blacklist.
+  - ~~Create a token blacklist.~~ :heavy_check_mark:
   - Create test for the logic on the controllers and/or `utils` module.
-  - Adopt PostgreSQL as the main database and maybe have SQLite as backup?
+  - ~~Adopt PostgreSQL as the main database~~ :heavy_check_mark: and maybe have SQLite as backup?
 - **FE**
   - ~~Create the login component.~~ :heavy_check_mark:
   - ~~Use token for request.~~ :heavy_check_mark:
-  - Login/Register screen.
+  - ~~Login/Register screen.~~ :heavy_check_mark:
   - Authenticate users.
-  - Add logout call to the API.
+  - ~~Add logout call to the API.~~ :heavy_check_mark:
   - Better refresh on NoteList component.
     - Add note.
     - Edit note.
@@ -159,7 +159,8 @@ Reach out to me at one of the following places!
 - **General**
   - ~~Generate simple logo for the application.~~ :heavy_check_mark:
   - Gather some screenshots.
-  - ~~Improve this `README`.~~ :heavy_check_mark:
+  - ~~Improve this `README`.~~ :heavy_check_mark:.
+  - Move all todo items into issues with labels.
 
 ---
 
