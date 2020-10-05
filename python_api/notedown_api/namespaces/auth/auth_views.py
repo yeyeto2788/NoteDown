@@ -42,6 +42,26 @@ class Login(Resource):
         return make_response(jsonify(token=token), status_code)
 
 
+@auth_namespace.route("/logout")
+@auth_namespace.doc(security={"apiKey": "X-API-KEY"})
+class Logout(Resource):
+
+    @auth_namespace.response(200, "Success")
+    @auth_namespace.response(404, "Not found error")
+    def post(self):
+        """Logout a given user.
+
+        Returns:
+
+        """
+        token = request.headers['X-API-KEY']
+        controller = AuthController()
+        user_email = controller.get_email_from_token(token)
+        status_code = 200
+
+        return make_response(jsonify(token=token), status_code)
+
+
 @auth_namespace.route("/register")
 class RegisterUser(Resource):
 

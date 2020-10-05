@@ -3,16 +3,33 @@ import { NavDropdown, Navbar, Form, FormControl, Nav, InputGroup } from "react-b
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 import { useApplicationValue } from "../AppStateProvider";
 import { reducerActions } from "../AppReducer";
 
 const HeaderComponent = (props) => {
-  const [{ currentUser }, dispatchAction] = useApplicationValue();
+  const [{ currentUser, userToken }, dispatchAction] = useApplicationValue();
 
   const handleLogout = () => {
+    const url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/auth/logout`;
+
+    axios
+      .post(url, null, {
+        headers: { "X-API-KEY": userToken },
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(`Successfully logout: ${data}`);
+      })
+      .catch((error) => {
+        console.error(`An error occurred trying to fetch ${url}`);
+        console.error(error);
+      });
+
     Cookies.remove("noteDownUser");
     Cookies.remove("noteDownUserToken");
+
     dispatchAction({
       type: reducerActions.tokenChange,
       item: null,
