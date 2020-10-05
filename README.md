@@ -140,11 +140,12 @@ Reach out to me at one of the following places!
   - ~~Create a token blacklist.~~ :heavy_check_mark:
   - Create test for the logic on the controllers and/or `utils` module.
   - ~~Adopt PostgreSQL as the main database~~ :heavy_check_mark: and maybe have SQLite as backup?
+  - Create a readiness/liveness endpoint for CD pipeline and/or FE calls on login/register screen.
 - **FE**
   - ~~Create the login component.~~ :heavy_check_mark:
   - ~~Use token for request.~~ :heavy_check_mark:
   - ~~Login/Register screen.~~ :heavy_check_mark:
-  - Authenticate users.
+  - ~~Authenticate users.~~ :heavy_check_mark:
   - ~~Add logout call to the API.~~ :heavy_check_mark:
   - Better refresh on NoteList component.
     - Add note.
