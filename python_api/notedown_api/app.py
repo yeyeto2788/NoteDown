@@ -19,7 +19,7 @@ def configure_database(app: Flask) -> None:
         app: a Flask application.
     """
     db.init_app(app)
-    db.create_all()  # TODO: This need to be deleted when table is created.
+    db.create_all()
 
 
 def configure_login(app: Flask) -> None:

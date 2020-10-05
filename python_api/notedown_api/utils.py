@@ -7,7 +7,7 @@ from flask import url_for, request
 from werkzeug.utils import redirect
 
 from notedown_api.config import TOKEN_SECRET
-from notedown_api.db_models import UserModel
+from notedown_api.models.user_model import UserModel
 
 logger = logging.getLogger()
 

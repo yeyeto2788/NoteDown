@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 
-from notedown_api.db_models import NoteModel
+from notedown_api.models import NoteModel
 from notedown_api.extensions import db
 from notedown_api.namespaces.auth.auth_controller import AuthController
 from notedown_api.utils import decode_token

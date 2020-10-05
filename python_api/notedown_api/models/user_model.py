@@ -1,6 +1,4 @@
-"""Database models declaration."""
-from datetime import datetime
-
+"""User model definition."""
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -15,7 +13,7 @@ notes = db.Table('user_notes',
 
 
 class UserModel(UserMixin, db.Model):
-    """User account model.
+    """User model.
 
     Attributes:
         id: User's id.
@@ -83,35 +81,6 @@ class UserModel(UserMixin, db.Model):
         representation = {
             self.__class__: {
                 self.email: self.username
-            }
-        }
-        return representation
-
-
-class NoteModel(db.Model):
-    """Tasks for the To Do list."""
-    __tablename__ = 'notes'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    text = db.Column(db.Text)
-    date_created = db.Column(db.DateTime, nullable=False)
-    date_edited = db.Column(db.DateTime, nullable=False)
-
-    user = db.relationship(
-        'UserModel',
-        secondary=notes,
-        lazy='subquery',
-        backref=db.backref('NoteModel', lazy=True)
-    )
-
-    def __init__(self, *args, **kwargs):
-        """On construction, set date of creation."""
-        super().__init__(*args, **kwargs)
-        self.date_created = datetime.utcnow()
-
-    def __repr__(self) -> dict:
-        representation = {
-            self.__class__: {
-                self.id: self.text
             }
         }
         return representation

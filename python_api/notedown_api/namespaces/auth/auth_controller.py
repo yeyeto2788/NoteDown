@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from notedown_api.db_models import UserModel
 from notedown_api.extensions import db
-from notedown_api.utils import create_token
+from notedown_api.models import UserModel, TokenBlackList
+from notedown_api.utils import create_token, decode_token
 
 
 class AuthController:
@@ -34,7 +34,7 @@ class AuthController:
             email: User's email.
 
         Returns:
-            UserModel retieved from the database.
+            UserModel retrieved from the database.
         """
         user = db.session.query(UserModel).filter_by(email=email).first()
         return user
@@ -51,6 +51,44 @@ class AuthController:
         """
         token = create_token(user.email)
         user.last_login = datetime.utcnow()
+        token_obj = TokenBlackList(token=token)
+        db.session.add(token_obj)
         db.session.add(user)
         db.session.commit()
         return token
+
+    @staticmethod
+    def validate_token(token: str) -> bool:
+        """
+
+        Args:
+            token:
+
+        Returns:
+
+        """
+        current_time = datetime.utcnow()
+        found_token = db.session.query(TokenBlackList) \
+            .filter_by(token=token).first()
+
+        if found_token is not None:
+
+            try:
+                token_payload = decode_token(found_token.token)
+            except:
+                return False
+
+            expire_date = token_payload.get('exp')
+
+            if expire_date < current_time:
+                return False
+
+            else:
+                return True
+        else:
+            added_token = TokenBlackList(token=token)
+
+            db.session.add(added_token)
+            db.session.commit()
+
+            return True
