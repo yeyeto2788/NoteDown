@@ -12,7 +12,7 @@ const HeaderComponent = (props) => {
   const [{ currentUser, userToken }, dispatchAction] = useApplicationValue();
 
   const handleLogout = () => {
-    const url = `${process.env.REACT_APP_NOTEDOWN_API_URL}/api/v1/auth/logout`;
+    const url = `/api/v1/auth/logout`;
 
     axios
       .post(url, null, {
