@@ -1,5 +1,6 @@
 # Python API image.
 FROM python AS notedown_server
+# Copy needed files
 COPY ./python_api/ /python_app/
 WORKDIR /python_app
 # Install dependencies and serve the API.
