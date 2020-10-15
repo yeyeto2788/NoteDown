@@ -9,5 +9,5 @@ if __name__ == "__main__":
     # Production
     serve(app, port=8080, threads=10)
     # Development
-    # app.run(host="0.0.0.0", port=8080, use_reloader=False)
+    # app.run(host="0.0.0.0", port=8080, use_reloader=True)
 
