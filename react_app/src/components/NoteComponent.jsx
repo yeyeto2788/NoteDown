@@ -8,13 +8,14 @@ import { formatDate } from "../utils";
 
 const NoteComponent = (props) => {
   const { date_created, date_edited, text } = props;
+  const text_to_show = text.split("\n", 15);
 
   return (
     <Card>
       <Card.Body>
         {/* Translation from markdown to html */}
         <div>
-          <ReactMarkdown source={text} disallowedTypes={["image"]} />
+          <ReactMarkdown source={text_to_show.join("\n")} disallowedTypes={["image"]} />
         </div>
       </Card.Body>
       <Card.Footer>

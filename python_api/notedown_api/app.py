@@ -1,10 +1,9 @@
 import logging
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from notedown_api.blueprints import root_bp
 from notedown_api.config import APP_ROOT_DIR
 from notedown_api.extensions import db, login_manager, api
 from notedown_api.namespaces import auth_namespace, notes_namespace
@@ -31,14 +30,6 @@ def configure_login(app: Flask) -> None:
     login_manager.user_loader(load_user)
     login_manager.unauthorized_handler(unauthorized)
     login_manager.init_app(app)
-
-
-def configure_blueprints(app: Flask) -> None:
-    """Registration of the application blueprints.
-    Args:
-        app: a Flask application.
-    """
-    app.register_blueprint(root_bp, url_prefix='/')
 
 
 def configure_api(app: Flask) -> None:
@@ -71,6 +62,11 @@ def page_not_found(exec_error):
     return jsonify(error)
 
 
+def log_request():
+    """Simple logging function so all hits are recorded."""
+    logger.info("{}".format(str(request.__dict__)))
+
+
 def create_app() -> Flask:
     """Creation of the Flask.app object as factory method.
 
@@ -90,8 +86,9 @@ def create_app() -> Flask:
         CORS(app)
         configure_database(app)
         configure_api(app)
-        configure_blueprints(app)
         configure_login(app)
+
+        app.before_request(log_request)
 
     logger.info("Exposing the following endpoints %s", app.url_map)
 

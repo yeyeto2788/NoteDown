@@ -42,16 +42,12 @@ const HeaderComponent = (props) => {
   };
 
   return (
-    <Navbar className="align-self-center" bg="primary" variant="dark" fixed="top" expand="lg">
+    <Navbar bg="primary" variant="dark" fixed="top" expand="lg">
       <Navbar.Brand href="#home">
         <img alt="" src={logo} width="30" height="30" className="d-inline-block align-top" />{" "}
         NoteDown
       </Navbar.Brand>
-      <Nav className="mr-auto">
-        {/* <Nav.Link href="#link1">link1</Nav.Link>
-        <Nav.Link href="#link2">link2</Nav.Link> */}
-      </Nav>
-      <Form>
+      <Form inline className="ml-auto">
         <InputGroup className="mt-3">
           <FormControl
             id="searchBox"
@@ -66,13 +62,13 @@ const HeaderComponent = (props) => {
           </InputGroup.Append>
         </InputGroup>
       </Form>
-      <Nav className="mr-auto">
+      <Nav>
         <NavDropdown title={currentUser} id="basic-nav-dropdown">
           <NavDropdown.Item href="#" onClick={handleLogout}>
             Logout
           </NavDropdown.Item>
-          <NavDropdown.Item href="#">Action 1</NavDropdown.Item>
-          <NavDropdown.Item href="#">Action 2</NavDropdown.Item>
+          {/* <NavDropdown.Item href="#">Action 1</NavDropdown.Item> */}
+          {/* <NavDropdown.Item href="#">Action 2</NavDropdown.Item> */}
         </NavDropdown>
       </Nav>
     </Navbar>
