@@ -1,10 +1,11 @@
-version: "3.8"
+version: "3.3"
 services:
   # Frontend Application.
   notedown_fe:
     build:
       context: ..
       dockerfile: ./deployment/notedown_fe.dockerfile
+    command: ["serve", "-l", "tcp://0.0.0.0:3000", "&"]
     container_name: notedown_fe
     environment:
       - NODE_ENV=production
@@ -56,10 +57,7 @@ services:
       dockerfile: ./deployment/notedown_app.dockerfile
     container_name: notedown_app
     environment:
-      VIRTUAL_HOST: notedown.juanbiondi.com
-    ports:
-      - "80:80"
-      - "443:443"
+      VIRTUAL_HOST: notedown.juanbiondi.com,www.notedown.juanbiondi.com
     depends_on:
       - notedown_db
       - notedown_fe

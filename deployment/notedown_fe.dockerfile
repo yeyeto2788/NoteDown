@@ -17,4 +17,4 @@ WORKDIR /build
 RUN npm install -g serve
 EXPOSE 3000
 # Execute the server.
-CMD ["serve", "-l", "3000"]
+CMD ["serve", "-l", "3000"]EXPOSE 3000
