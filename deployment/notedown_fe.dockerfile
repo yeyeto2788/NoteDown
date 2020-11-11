@@ -5,16 +5,9 @@ COPY ./react_app/ /react_app/
 # Install dependencies and build the app.
 RUN npm install && npm run build
 
-
-# Serve the application using NGINX
-FROM node:14.11.0-stretch
-# Copy files from previous layer.
-COPY --from=notedown_react /react_app/build /build
-# Copy package.json.
-COPY ./react_app/package.json /build/package.json
-WORKDIR /build
-# Install dependencies.
-RUN npm install -g serve
-EXPOSE 3000
-# Execute the server.
-CMD ["serve", "-l", "3000"]EXPOSE 3000
+# Serve all application parts using NGINX
+FROM nginx:1.17.1-alpine
+COPY ./deployment/nginx.conf /etc/nginx/nginx.conf
+COPY --from=notedown_react /react_app/build /usr/share/nginx/html
+EXPOSE 80 443
+CMD ["nginx", "-g", "daemon off;"]

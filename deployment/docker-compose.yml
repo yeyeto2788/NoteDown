@@ -5,10 +5,10 @@ services:
     build:
       context: ..
       dockerfile: ./deployment/notedown_fe.dockerfile
-    command: ["serve", "-l", "tcp://0.0.0.0:3000", "&"]
     container_name: notedown_fe
     environment:
       - NODE_ENV=production
+      - VIRTUAL_HOST=notedown.juanbiondi.com,www.notedown.juanbiondi.com
     depends_on:
       - notedown_db
       - notedown_api
@@ -17,6 +17,8 @@ services:
         condition: on-failure
         delay: 5s
         max_attempts: 3
+    ports:
+      - "3000:80"
 
   # Backend API
   notedown_api:
@@ -50,18 +52,6 @@ services:
         max_attempts: 3
     expose:
       - 5432
-
-  notedown_app:
-    build:
-      context: ..
-      dockerfile: ./deployment/notedown_app.dockerfile
-    container_name: notedown_app
-    environment:
-      VIRTUAL_HOST: notedown.juanbiondi.com,www.notedown.juanbiondi.com
-    depends_on:
-      - notedown_db
-      - notedown_fe
-      - notedown_api
 
 networks:
   default:
