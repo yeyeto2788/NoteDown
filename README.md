@@ -1,7 +1,11 @@
 <!-- PROJECT LOGO -->
 
-<img src="./documentation/notedown_logo.svg" height="180">
+<div align="center">
+<img src="./documentation/images/animation.gif" height="400">
+</div>
+<div align="center">
 <qoute>Markdown :bookmark_tabs: note taking app using React.js and Python.<qoute>
+</div>
 
 <!-- Project images -->
 
