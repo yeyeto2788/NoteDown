@@ -17,8 +17,6 @@ services:
         condition: on-failure
         delay: 5s
         max_attempts: 3
-    ports:
-      - "3000:80"
 
   # Backend API
   notedown_api:
