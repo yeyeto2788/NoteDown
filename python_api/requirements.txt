@@ -4,5 +4,5 @@ psycopg2==2.8.5
 waitress==3.0.1
 flask_login==0.5.0
 flask-restx==0.5.1
-Flask-Cors==5.0.0
+Flask-Cors==6.0.0
 PyJWT==2.4.0
